@@ -202,57 +202,58 @@ function createScutoid(gl, translation, rotationAxis)
 
     var verts = [
 
-       // Bottom hexagon
-       0.5, 0, 0,
-       Math.cos(60 * conv)/2, 0, Math.sin(60 * conv)/2,
-       Math.cos(300 * conv)/2, 0, Math.sin(300 * conv)/2,
-       Math.cos(240 * conv)/2, 0, Math.sin(240 * conv)/2,
-       Math.cos(120 * conv)/2, 0, Math.sin(120 * conv)/2,
-       -0.5, 0, 0,       
-
-       // Face 1
-       0.5, 0, 0,
-       Math.cos(60 * conv)/2, 0, Math.sin(60 * conv)/2,
-       0.5, 1, 0,
-       Math.cos(60 * conv)/2, 1, Math.sin(60 * conv)/2,
-
-       // Face 2
-        Math.cos(60 * conv)/2, 0, Math.sin(60 * conv)/2,
-        Math.cos(120 * conv)/2, 0, Math.sin(120 * conv)/2,
-        Math.cos(60 * conv)/2, 1, Math.sin(60 * conv)/2,
-        Math.cos(120 * conv)/2, 1, Math.sin(120 * conv)/2,
-
-       // Face 3
-       Math.cos(120 * conv)/2, 0, Math.sin(120 * conv)/2,
-       -0.5, 0, 0,
-       Math.cos(120 * conv)/2, 1, Math.sin(120 * conv)/2,
-       -0.5, 1, 0,
-
-       // Face 4
-       -0.5, 0, 0,
-       Math.cos(240 * conv)/2, 0, Math.sin(240 * conv)/2,
-        -0.5, 1, 0,
-       Math.cos(240 * conv)/2, 1, Math.sin(240 * conv)/2,
-
-       // Face 5
-       Math.cos(240 * conv)/2, 0, Math.sin(240 * conv)/2,
-       Math.cos(300 * conv)/2, 0, Math.sin(300 * conv)/2,
-       Math.cos(240 * conv)/2, 1, Math.sin(240 * conv)/2,
-       Math.cos(300 * conv)/2, 1, Math.sin(300 * conv)/2,
-
-       // Face 6
-       Math.cos(300 * conv)/2, 0, Math.sin(300 * conv)/2,
-       0.5, 0, 0,
-       Math.cos(300 * conv)/2, 1, Math.sin(300 * conv)/2,
-       0.5, 1, 0,
-
        // Top hexagon
        0.5, 1, 0,
        Math.cos(60 * conv)/2, 1, Math.sin(60 * conv)/2,
        Math.cos(300 * conv)/2, 1, Math.sin(300 * conv)/2,
        Math.cos(240 * conv)/2, 1, Math.sin(240 * conv)/2,
        Math.cos(120 * conv)/2, 1, Math.sin(120 * conv)/2,
-       -0.5, 1, 0
+       -0.5, 1, 0,
+
+       // Face 3
+       Math.cos(162 * conv)/2, 0, Math.sin(162 * conv)/2,
+       Math.cos(234 * conv)/2, 0, Math.sin(234 * conv)/2,
+        -0.5, 1, 0,
+       Math.cos(240 * conv)/2, 1, Math.sin(240 * conv)/2,
+
+       // Face 4
+       Math.cos(234 * conv)/2, 0, Math.sin(234 * conv)/2,
+       Math.cos(306 * conv)/2, 0, Math.sin(306 * conv)/2,
+       Math.cos(240 * conv)/2, 1, Math.sin(240 * conv)/2,
+       Math.cos(300 * conv)/2, 1, Math.sin(300 * conv)/2,
+
+       // Face 5
+       Math.cos(306 * conv)/2, 0, Math.sin(306 * conv)/2,
+       Math.cos(18 * conv)/2, 0, Math.sin(18 * conv)/2,
+       Math.cos(300 * conv)/2, 1, Math.sin(300 * conv)/2,
+       0.5, 1, 0,
+
+       // Bot Pentagon
+       Math.cos(162 * conv)/2, 0, Math.sin(162 * conv)/2,
+       Math.cos(234 * conv)/2, 0, Math.sin(234 * conv)/2,
+       0, 0, 0.5,
+       Math.cos(306 * conv)/2, 0, Math.sin(306 * conv)/2,
+       Math.cos(18 * conv)/2, 0, Math.sin(18 * conv)/2,
+
+       // Middle
+       0, 0.5, 0.5,
+       Math.cos(60 * conv)/2, 1, Math.sin(60 * conv)/2,
+       Math.cos(120 * conv)/2, 1, Math.sin(120 * conv)/2,
+
+       // Face 1
+       0.5, 1, 0,
+       Math.cos(60 * conv)/2, 1, Math.sin(60 * conv)/2,
+       Math.cos(18 * conv)/2, 0, Math.sin(18 * conv)/2,
+       0, 0.5, 0.5,
+       0, 0, 0.5,
+
+       // Face 2
+       -0.5, 1, 0,
+       Math.cos(120 * conv)/2, 1, Math.sin(20 * conv)/2,
+       Math.cos(162 * conv)/2, 0, Math.sin(162 * conv)/2,
+       0, 0.5, 0.5,
+       0, 0, 0.5  
+
 
        ];
 
@@ -262,14 +263,14 @@ function createScutoid(gl, translation, rotationAxis)
     var colorBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
     var faceColors = [
-        [0.0, 0.0, 0.0, 0.0], // Face 1
-        [1.0, 0.0, 0.0, 1.0], // Face 2
-        [0.0, 1.0, 0.0, 1.0], // Face 3
-        [0.0, 0.0, 1.0, 1.0], // Face 4
-        [1.0, 1.0, 0.0, 1.0], // Face 5
-        [1.0, 0.0, 1.0, 1.0], // Face 6
-        [0.0, 1.0, 1.0, 1.0], // Face 7
-        [1.0, 1.0, 1.0, 1.0]  // Face 8
+        [0.0, 0.0, 0.0, 0.0], // Top Hexagon
+        [1.0, 0.0, 0.0, 1.0], // Face 3
+        [0.0, 1.0, 0.0, 1.0], // Face 4
+        [0.0, 0.0, 1.0, 1.0], // Face 5
+        [1.0, 1.0, 0.0, 1.0], // Pentagon
+        [1.0, 0.0, 1.0, 1.0], // Middle
+        [0.0, 1.0, 1.0, 1.0], // Face 1
+        [1.0, 1.0, 1.0, 1.0]  // Face 2
     ];
 
     // Each vertex must have the color information, that is why the same color is concatenated 4 times, one for each vertex of the scutoid's face.
@@ -291,6 +292,8 @@ function createScutoid(gl, translation, rotationAxis)
     // Index data (defines the triangles to be drawn).
     var scutoidIndexBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, scutoidIndexBuffer);
+
+    /*
     var scutoidIndices = [
         
         0, 1, 2,   1, 2, 3,   1, 3, 4,   3, 4, 5, // Bottom hexagon
@@ -302,6 +305,19 @@ function createScutoid(gl, translation, rotationAxis)
         26, 27, 28,   27, 28, 29, // Face 6
         30, 31, 32,   31, 32, 33,   31, 33, 34,   33, 34, 35
     ];
+    */
+
+    var scutoidIndices = [
+        
+        0, 1, 2,   1, 2, 3,   1, 3, 4,   3, 4, 5, // Top hexagon
+        6, 7, 8,   7, 8, 9, // Face 3
+        10, 11, 12,   11, 12, 13, // Face 4
+        14, 15, 16,   15, 16, 17, // Face 5
+        18, 19, 20,   19, 20, 21,   20, 21, 22, // Pentagon
+        23, 24, 25, // Middle
+        26, 27, 28,   27, 28, 29,   28, 29, 30, // Face 1
+        31, 32, 33,   32, 33, 34,   33, 34, 35 // Face 2
+    ];
 
     //console.log(verts.length/3);
 
@@ -311,7 +327,7 @@ function createScutoid(gl, translation, rotationAxis)
     
     var scutoid = {
             buffer:vertexBuffer, colorBuffer:colorBuffer, indices:scutoidIndexBuffer,
-            vertSize:3, nVerts:36, colorSize:4, nColors: 36, nIndices:51,
+            vertSize:3, nVerts:36, colorSize:4, nColors: 36, nIndices:60,
             primtype:gl.TRIANGLES, modelViewMatrix: mat4.create(), currentTime : Date.now()};
 
     mat4.translate(scutoid.modelViewMatrix, scutoid.modelViewMatrix, translation);
