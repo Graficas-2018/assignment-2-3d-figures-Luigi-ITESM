@@ -132,16 +132,28 @@ function createPyramid(gl, translation, rotationAxis)
 
     // Each vertex must have the color information, that is why the same color is concatenated 4 times, one for each vertex of the pyramid's face.
     var vertexColors = [];
+    var typeFace = "";
     // for (var i in faceColors) 
     // {
     //     var color = faceColors[i];
     //     for (var j=0; j < 4; j++)
     //         vertexColors = vertexColors.concat(color);
     // }
-    for (const color of faceColors) 
+    /*for (const color of faceColors) 
     {
         for (var j=0; j < 4; j++)
             vertexColors = vertexColors.concat(color);
+    }*/
+
+    for (var i in faceColors){
+      var color = faceColors[i];
+      if (i > 4) {
+        for (var j=0; j < 5; j++)
+            vertexColors = vertexColors.concat(color);
+      } else {
+        for (var j=0; j < 3; j++)
+            vertexColors = vertexColors.concat(color);
+      }
     }
 
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertexColors), gl.STATIC_DRAW);
@@ -249,7 +261,7 @@ function createScutoid(gl, translation, rotationAxis)
 
        // Face 2
        -0.5, 1, 0,
-       Math.cos(120 * conv)/2, 1, Math.sin(20 * conv)/2,
+       Math.cos(120 * conv)/2, 1, Math.sin(120 * conv)/2,
        Math.cos(162 * conv)/2, 0, Math.sin(162 * conv)/2,
        0, 0.5, 0.5,
        0, 0, 0.5  
@@ -263,14 +275,14 @@ function createScutoid(gl, translation, rotationAxis)
     var colorBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
     var faceColors = [
-        [0.0, 0.0, 0.0, 0.0], // Top Hexagon
+        [1.0, 1.0, 1.0, 1.0], // Top Hexagon
         [1.0, 0.0, 0.0, 1.0], // Face 3
         [0.0, 1.0, 0.0, 1.0], // Face 4
         [0.0, 0.0, 1.0, 1.0], // Face 5
         [1.0, 1.0, 0.0, 1.0], // Pentagon
         [1.0, 0.0, 1.0, 1.0], // Middle
         [0.0, 1.0, 1.0, 1.0], // Face 1
-        [1.0, 1.0, 1.0, 1.0]  // Face 2
+        [1.0, 0.64, 0.12, 1.0]  // Face 2
     ];
 
     // Each vertex must have the color information, that is why the same color is concatenated 4 times, one for each vertex of the scutoid's face.
@@ -281,10 +293,62 @@ function createScutoid(gl, translation, rotationAxis)
     //     for (var j=0; j < 4; j++)
     //         vertexColors = vertexColors.concat(color);
     // }
-    for (const color of faceColors) 
+    /*for (const color of faceColors) 
     {
         for (var j=0; j < 4; j++)
             vertexColors = vertexColors.concat(color);
+    }
+     for (var i = 0; i < 1; i++){
+      color = faceColors[i];
+      for (var j=0; j < 8; j++)
+            vertexColors = vertexColors.concat(color);
+    }
+
+    for (var i = 1; i < faceColors.length; i++){
+      color = faceColors[i];
+      for (var j=0; j < 4; j++)
+            vertexColors = vertexColors.concat(color);
+    }*/
+
+    // Every face has different amount of vertex, every case corresponds to every face at this order
+
+    for (var i = 0; i < faceColors.length; i++){
+      color = faceColors[i];
+      
+      switch(i) {
+        case 0:
+          for (var j=0; j < 6; j++)
+            vertexColors = vertexColors.concat(color);
+          break;
+        case 1:
+          for (var j=0; j < 4; j++)
+            vertexColors = vertexColors.concat(color);
+          break;
+        case 2:
+          for (var j=0; j < 4; j++)
+            vertexColors = vertexColors.concat(color);
+          break;
+        case 3:
+          for (var j=0; j < 4; j++)
+            vertexColors = vertexColors.concat(color);
+          break;
+        case 4:
+          for (var j=0; j < 5; j++)
+            vertexColors = vertexColors.concat(color);
+          break;
+        case 5:
+          for (var j=0; j < 3; j++)
+            vertexColors = vertexColors.concat(color);
+          break;
+        case 6:
+          for (var j=0; j < 5; j++)
+            vertexColors = vertexColors.concat(color);
+          break;
+        case 7:
+          for (var j=0; j < 40; j++)
+            vertexColors = vertexColors.concat(color);
+          break;
+      }
     }
 
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertexColors), gl.STATIC_DRAW);
@@ -292,20 +356,6 @@ function createScutoid(gl, translation, rotationAxis)
     // Index data (defines the triangles to be drawn).
     var scutoidIndexBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, scutoidIndexBuffer);
-
-    /*
-    var scutoidIndices = [
-        
-        0, 1, 2,   1, 2, 3,   1, 3, 4,   3, 4, 5, // Bottom hexagon
-        6, 7, 8,   7, 8, 9, // Face 1
-        10, 11, 12,   11, 12, 13, // Face 2
-        14, 15, 16,   15, 16, 17,// Face 3
-        18, 19, 20,   19, 20, 21, // Face 4
-        22, 23, 24,   23, 24, 25, // Face 5
-        26, 27, 28,   27, 28, 29, // Face 6
-        30, 31, 32,   31, 32, 33,   31, 33, 34,   33, 34, 35
-    ];
-    */
 
     var scutoidIndices = [
         
@@ -410,14 +460,14 @@ function createOctahedron(gl, translation, rotationAxis)
     var colorBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
     var faceColors = [
-        [0.0, 0.0, 0.0, 0.0], // Face 1
+        [1.0, 1.0, 1.0, 1.0], // Face 1
         [1.0, 0.0, 0.0, 1.0], // Face 2
         [0.0, 1.0, 0.0, 1.0], // Face 3
         [0.0, 0.0, 1.0, 1.0], // Face 4
         [1.0, 1.0, 0.0, 1.0], // Face 5
         [1.0, 0.0, 1.0, 1.0], // Face 6
         [0.0, 1.0, 1.0, 1.0], // Face 7
-        [1.0, 1.0, 1.0, 1.0]  // Face 8
+        [1.0, 0.64, 0.12, 1.0]  // Face 8
     ];
 
     // Each vertex must have the color information, that is why the same color is concatenated 4 times, one for each vertex of the octahedron's face.
@@ -428,9 +478,11 @@ function createOctahedron(gl, translation, rotationAxis)
     //     for (var j=0; j < 4; j++)
     //         vertexColors = vertexColors.concat(color);
     // }
+
+    // Every face has 3 vertex
     for (const color of faceColors) 
     {
-        for (var j=0; j < 4; j++)
+        for (var j=0; j < 3; j++)
             vertexColors = vertexColors.concat(color);
     }
 
@@ -462,6 +514,12 @@ function createOctahedron(gl, translation, rotationAxis)
 
     mat4.translate(octahedron.modelViewMatrix, octahedron.modelViewMatrix, translation);
 
+    // How much does It will move per frame
+    moveY = 0.1;
+
+    // Help variable to delimite the figure to the bot and top
+    transY = 0;
+
     octahedron.update = function()
     {
         var now = Date.now();
@@ -469,13 +527,30 @@ function createOctahedron(gl, translation, rotationAxis)
         this.currentTime = now;
         var fract = deltat / duration;
         var angle = Math.PI * 2 * fract;
-    
+        //console.log(translation[1] + moveY);
+
+        //console.log(transY);
+
         // Rotates a mat4 by the given angle
         // mat4 out the receiving matrix
         // mat4 a the matrix to rotate
         // Number rad the angle to rotate the matrix by
         // vec3 axis the axis to rotate around
+        //mat4.identity(this.modelViewMatrix);
         mat4.rotate(this.modelViewMatrix, this.modelViewMatrix, angle, rotationAxis);
+
+        // Translate every frame 0.1 on y axis
+        mat4.translate(this.modelViewMatrix, this.modelViewMatrix, [0,moveY,0]);
+
+        // Add to the variable 0.1 every frame
+        transY += moveY;
+
+        // The limits of the page are 3 and -3 and this is because we have -10 on z-axis 
+        if (transY > 3 || transY < -3)
+          // Everytime we hit the limit we need to change the direction of the figure (if it needs to be to the other side we need to multiply by -1)
+          moveY *= -1;
+
+
     };
     
     return octahedron;

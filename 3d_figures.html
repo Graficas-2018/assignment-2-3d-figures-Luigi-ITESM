@@ -18,9 +18,9 @@
 		        initGL(canvas);
 				initShader(gl);
 				// TO DO: create and draw the figures
-				var pyramid = createPyramid(gl, [-3, 3, -10], [0.1, 1.0, 0.2]);
-				var scutoid = createScutoid(gl,[-3, -3, -10], [0,1,0] )
-				var octahedron = createOctahedron(gl, [-3, 0, -10], [0,1,0]);
+				var pyramid = createPyramid(gl, [-3, -0.5, -10], [0.1, 1.0, 0.2]);
+				var scutoid = createScutoid(gl,[0, -0.5, -10], [-0.4, 1.0, 0.1] )
+				var octahedron = createOctahedron(gl, [3, 0, -10], [0,1,0]);
 				run(gl, [pyramid,octahedron, scutoid]);
 			}
 	);
